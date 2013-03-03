@@ -18,9 +18,9 @@
   <!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
   <!--main stylesheet-->
-  <link rel="stylesheet" href="stylesheets/screen.css">
+  <link rel="stylesheet" href="css/core.css">
   <!--custom stylesheet: write your styles in it-->
-  <link rel="stylesheet" href="stylesheets/screen.css">
+  <link rel="stylesheet" href="css/custom.css">
 
   <!--modernizr lib-->
   <script src="js/vendor/modernizr-2.6.1.min.js"></script>
@@ -41,15 +41,39 @@
   <header class="b-header">
     <!--logo-->
     <a class="b-logo" href="index.html" itemprop='url'>
-      <img src="img/logo.png" alt="" itemprop='logo' itemscope itemtype='http://schema.org/ImageObject'>
-      <span class="name" itemprop="name"></span>
+      <img src="img/logo.png" alt="Canape - рекламное агенство" itemprop='logo' itemscope itemtype='http://schema.org/ImageObject'>
+      <span class="name" itemprop="name">Canape</span>
+      <span class="name" itemprop="description">рекламное агенство</span>
     </a>
-    <!--navigation-->
-    <nav class="b-nav" itemscope itemtype='http://schema.org/SiteNavigationElement'>
-      <a href="#" class="unit active"></a>
-      <a href="#" class="unit"></a>
-    </nav>
+    <!--social-->
+    <ul class="b-social">
+      <li><a href="#" class="unit--1" title="VKontakte"></a></li>
+      <li><a href="#" class="unit--2" title="Facebook"></a></li>
+      <li><a href="#" class="unit--3" title="Twitter"></a></li>
+      <li><a href="#" class="unit--4" title="RSS"></a></li>
+    </ul>
   </header><!--END HEADER-->
+
+  <!--NAV-->
+  <nav class="b-nav" itemscope itemtype='http://schema.org/SiteNavigationElement'>
+    <a href="#" class="unit--text">О нас</a>
+    <a href="#" class="unit--text">Новости</a>
+    <a href="#" class="unit--1" title="Ресторан под ключ"></a>
+    <a href="#" class="unit--2" title="Маркетинг"></a>
+    <a href="#" class="unit--3" title="Концепция"></a>
+    <a href="#" class="unit--4" title="Бизнес-план"></a>
+    <a href="#" class="unit--5" title="Проект"></a>
+    <a href="#" class="unit--6" title="Меню"></a>
+    <a href="#" class="unit--7" title="Диагностика"></a>
+    <a href="#" class="unit--8" title="Реклама"></a>
+    <a href="#" class="unit--9" title="Ребрендинг"></a>
+    <a href="#" class="unit--10" title="Тайный посетитель"></a>
+    <a href="#" class="unit--11" title="Управление"></a>
+    <a href="#" class="unit--12" title="Персонал"></a>
+    <a href="#" class="unit--13" title="Юрисконсульт"></a>
+    <a href="#" class="unit--text">Контакты</a>
+  </nav><!--END NAV-->
+
 
   <!--MAIN-->
   <div class="b-main" role="main">
@@ -63,14 +87,11 @@
 </div><!-- END page-body -->
 
 <!-- FOOTER -->
-<footer class="b-footer">
-  <!--logo-->
-  <a class="b-logo" href="/">
-    <img src="img/logo-footer.png" alt="">
-    <span class="name"></span>
-  </a>
-  <!--copyright-->
-  <small class="b-copy"></small>
+<footer class="b-footer--inner">
+  <!--phone-->
+  <address class="b-phone">(057) 7004999</address>
+  <!--email-->
+  <a href="mailto:info@canape.in.ua" class="b-email">info@canape.in.ua</a>
 </footer>
 <!-- END FOOTER -->
 

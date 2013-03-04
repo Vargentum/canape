@@ -70,7 +70,7 @@ $baseFamily                         : Verdana, Geneva, sans-serif;
 //misc
 $baseFontSize                       : 12px;
 $baseLineHeight                     : 1.4;
-$paragraphSpace                     : 15px;
+$paragraphSpace                     : 20px;
 $inputHeight                        : 40px;
 //default vars
 $lmc-1                              : $linkColor !default;
@@ -379,6 +379,13 @@ DEVELOPER STYLES RUN BELOW THIS POINT
   width: $baseWidth-inner;
   min-width: $baseWidth-inner;
 }
+
+.state-scale{
+  .csstransitions &{
+    @include single-transition($duration: .3s);
+    &:hover,&:focus{@include scale(1.5);}
+  }
+}
 /*LAYOUT---------------------------------*/
 body {
   height: 100%;
@@ -431,6 +438,7 @@ body {
   .unit{
     display: block;
     margin:0 10px;
+    @extend .state-scale;
   }
   .unit--1{width: 34px; height: 34px;}
   .unit--2{width: 33px; height: 32px;}
@@ -471,10 +479,21 @@ body {
   @for $i from 1 through 13 {
     .unit--#{$i} {
       @extend .unit;
+      @extend .state-scale;
       @include icons-sprite(nav-small-#{$i});
     }
   }
 
+}
+
+.b-main__tip{
+  position: absolute;
+  display: block;
+  width: 17px;
+  height: 25px;
+  right:30px;
+  top: 25px;
+  @include icons-sprite(tip-inner);
 }
 
 .b-phone{
@@ -497,13 +516,6 @@ body {
   height: 25px;
 }
 
-.b-crumbs{
-  @extend .hLine;
-  .unit{
-    &.active{}
-  }
-}
-
 /*INDEX page  -----------------------*/
 .b-container--pageIndex{}
 
@@ -512,7 +524,38 @@ body {
   @extend .b-stickyFooter_helper-1;
   position: relative;
 }
+/*ABOUT page ------------------------*/
+.b-template--about{
+  padding:0 10px 160px 50px;
+  position:relative;
+  .title{
+    @include text(18px, $titleColor, bold);
+    line-height: 1.2;
+    margin-bottom: 25px;
+    position: relative;
+    &:before{
+      @extend .pseudo-block;
+      width: 58px;
+      height: 55px;
+      top:50%;
+      margin-top: -27px;
+      left:-75px;
+      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADoAAAA3CAMAAABq+6nEAAADAFBMVEXifZvjfZzogJ/pe5zygKLvhKTyf6Lzhqfzhqfzhqflfp3vqL7zhqfzhqfrgqLzhqfzhqf4vs/zhqfzhabzhqfkepryfJ/pgKD4t8vzhqfmf57sgqLzhqfzhqflfp3////////z8/P////////x8fH////////whKXzhqfzhqf//f70hqf////zhqfzhqfzhqfzhqfug6P////////////tgqLzhqfzhqfvg6Ty8vL////zhqfzhqf////w8PD////8/Pzv7+/u7u7////////6+vr////////////zhqfzhqf////9/f3////zhqfzhqfzhqfkfZ3ug6PrgaHzhqfzhqfrgaHzhqfnf5/zhqfzhqfzhqfzhqftg6PjfZzzhqfzhqfzhqfpgKDzhqftg6PpgKDzhqfnf57zhqfzhqfzhqfy8vL////zhqfzhqfwhKTkfp3zhqf////zhqfxhabzhqfzhqfzhqfzhqfpgKDzhqf////zhqfogJ/4+Pjzhqfnf5/zhqfzhqfzhqfzhqfzhqfzhqfzhqfogJ/yhab////zhqcAAADkfZz3ssfidpf4u8771uH5xNTxtcj96O/4uszsgqLyg6X5xdX72+XqgaH8/PzxhKX4s8j72eP2pb76yNf+9PfyfaD2orz5wtP++Pn83ufz8vL1nrj95u3+7vP6yNbzi6v0krD+9/n84ur3q8H5y9n//f72n7n72uT1mLX98fT6ytj84Oj61ODmfp71mbX2qMD+7vP0jKz4uMv6x9b85ez0j674scb71ODzh6j0ka/60t7/+vz60N3vg6T5wdLzgqT//f3yhab+8vb9/f33qsL6ydj4us3pgKD3rcP4tsr6zNr71N/83Ob4ucz0jq3//v796/H+8/b83eb6y9n0iqrzgKP5v9H0ian++fvyfqL1lrP97/P2orv0j6372OLzgaP84enyfqH0lLHygaT+9fj2qcDygaPygKLzhaflfp7zg6XygKPzhKbzhKXzgqTzhabyf6Lzhqf///8arWHNAAAAjXRSTlP+/tbFe64vaQci6MBZHcBcLl6ZOor0Ts5wQOG9JHHsaTHTBwPkO4OrTwIpnGeUSHRVs0NdCLkTUbDdVEwDIuiGqvP9mRCxV1E+NCwdpoBlOELxssFoBsIf2T4WoFO3/Jd2IMtFtsyW3odJMNwKf2as72+RDKUaGCoF0SkJndS9hNhNDwENgwqJ0qECfgBwM/M8AAADSklEQVR42o3WdVAUURzA8R0bu7u7u7u7xW5sFMFCFIPOtQu7C7sVHRUMjFVQBBQxAKUbztvduX3P5e62uH137/vX/vOZN2/m92Z/BKnewkUL5i+2KeKypPj8BbUcSbVUaYliRXdxNMUAY0SdenUxaNfWlcrsS0jYvfPJ4zgqkdIY9ZFOiyzQkUP6X4TG/ibviUqiOB0wNmWiGTpmoMBEfjjylYTXb0DREYOgSpdvUpRgJ7mqUr9xEFFaFifYj/4q1HksRPYzl9MI2HdqYTp0GzTThyjpwos9lNRvGDRfTD4QsndX0AHQQrGRnGi3y+lwaLGcpDzRzpFov8HQcncp8brzpgvUbxvEKZcGQnMF2htilcFoRNvHQJ174dHbd6TbbnXS0y4Qs/ccEOtYQJs0wqW/siW6xJ2nzcJx6Y+rrEiP2fJ0LcQt5xoFxDxJonFTbPo3SUZ9WhENj2LT61ky+sWKaACxS/7OAqmWxFp8eoPRyagn0Ryf/uaArDZE53BsmkvLaTdi1UpcGRjHyqkPQbbFpREckOdCkLjH/ohjFHQTP/41P+DI2CccUFSep9UTcOgVTqOk63lahQq1LL8yDFC2nKcbqrFvLUqdFhSqAk/da7CHAszLzxoT+a4iT8mqgKFvBqJh8qdEBhRu2boCuuIjAInfb71BPLVTj/8weSZ0KVlA3erzn9r4e9E/TeHpzyejw85fuJRemK7gKZ83KCibS32Rdl/uwk4cD6G/Qb6cLEopa3sZ6OYvQJ82Pzs15dmDR98yHv56+TvmbAjFncmF+s7lK2kH4Z+zBQixeVwmzWp0bHwml64FIDPKQENphXToLlD+WHk6PmAoPcVADyhPXSP9JLcDRDqtflyCnyoe3Ix1EvVwQVkGRGQEP0+lFOMwU74QjApCnpuve0WzFMdJY+GvXENWA2T8xamUl3vF9zrZSUlJT4COfZoMYQJtfONuJiuXN5pqQ3IgDDBQH0eVbc0ObakX+9Nes4Bv2izVHXF8ENoCrf7dzfZCbKYTtiKtfkZ2WKOXWi//IICu50azq/ToLShs0wO1D0vYu7Sp29GifV+c3d/DdemyfxI76GBvXQ6x+6tUysq1pF07X9/Ky9eUtXUj1foPL92OXnxx9uMAAAAASUVORK5CYII=);
+      .ie8 &{background-image: url("../img/base64/about-title.png")}
 
+    }
+  }
+  .figure{
+    width: 603px;
+    height: 358px;
+    position: absolute;
+    bottom: 10px;
+    right:-53%;
+    background-image: url("../img/about-figure.png");
+  }
+}
+
+/*ABOUT page ------------------------*/
 
 
 

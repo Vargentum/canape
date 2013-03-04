@@ -19,6 +19,7 @@
 
 //SPRITING
 @import "icons/*.png";
+@import "nav/*.png";
 
 *,*:before,*:after,input[type=search]{@include box-sizing(border-box);}//border-box-sizing for all elems
 
@@ -193,7 +194,7 @@ $default-text-weight                : normal !default;
 
 //Link Mixin Colors
 @mixin singleLink($lmc-1){@include link-colors($lmc-1,$lmc-1,$lmc-1,$lmc-1,$lmc-1);}
-@mixin simpleLink($lmc-1, $lmc-1){@include link-colors($lmc-1,$lmc-2,$lmc-1, $lmc-1, $lmc-2);}
+@mixin simpleLink($lmc-1, $lmc-2){@include link-colors($lmc-1,$lmc-2,$lmc-1, $lmc-1, $lmc-2);}
 @mixin singleLink-custom($lmc-1, $decorationType){
   @include singleLink($lmc-1);
   text-decoration: none;
@@ -304,7 +305,11 @@ input[type="checkbox"]:focus {
   outline-offset: -2px;
 }
 
-
+.input-reset{
+  background-color: transparent;
+  border: none;
+  &:hover,&:focus{outline: none;}
+}
 /*===============================================================
 CUSTOM TYPOGRAPHY
 ===============================================================*/
@@ -495,6 +500,26 @@ body {
   top: 25px;
   @include icons-sprite(tip-inner);
 }
+.b-pagination{
+  margin:30px 0 0;
+  text-align: center;
+  .unit{
+    @include simpleLink(#9a9a9a,$titleColor);
+    font-weight: bold;
+    margin: 0 3px;
+    text-decoration: none;
+    &.active{@include singleLink($titleColor);}
+  }
+  .unit--prev{
+    @extend .unit;
+    margin:0 5px;
+    &:before{content: '<';}
+  }
+  .unit--next{
+    @extend .unit--prev;
+    &:before{content: '>';}
+  }
+}
 
 .b-phone{
   @include inline-block;
@@ -524,6 +549,7 @@ body {
   @extend .b-stickyFooter_helper-1;
   position: relative;
 }
+
 /*ABOUT page ------------------------*/
 .b-template--about{
   padding:0 10px 160px 50px;
@@ -555,8 +581,84 @@ body {
   }
 }
 
-/*ABOUT page ------------------------*/
-/*ABOUT page ------------------------*/
+/*NAV page ------------------------*/
+.b-template--nav{
+  .title{
+    text-transform: uppercase;
+    @include text(36px,$titleColor);
+  }
+  .content{padding-left: 70px;}
+}
+.b-template--nav__list{
+  margin:30px 0;
+  color: $titleColor;
+  font-weight: bold;
+  @extend .jLine;
+  .unit{
+    width:170px;
+    margin:10px 0;
+    font-size: 13px;
+    line-height: 1.2;
+    .text{
+      @include inline-block;
+      width:110px;
+    }
+    &:before{
+      @extend .pseudo-inline;
+      width:38px;
+      height: 38px;
+      margin-right: 10px;
+    }
+  }
+  .unit--3:before{width: 39px;}
+  @for $i from 1 through 13 {
+    .unit--#{$i} {
+      @extend .unit;
+      &:before{@include nav-sprite(nav-#{$i});}
+    }
+  }
+
+}
+
+/*FEEDBACK page ------------------------*/
+.b-template--feedback{
+  .title{
+    @include text(25px,$titleColor,bold);
+    margin-bottom: 25px;
+  }
+  .form{
+    margin:25px 0 25px;
+  }
+  .form__field{
+    width:100%;
+    height: 105px;
+    display: block;
+    margin-bottom: 10px;
+    padding:7px 15px;
+    border: none;
+    background-color: #ebebeb;
+  }
+  .form__submit{
+    @include text(12px,#d82031,bold);
+    text-transform: uppercase;
+    @extend .input-reset;
+  }
+  .unit{
+    margin-bottom: 25px;
+    line-height: 1.5;
+  }
+  .unit__title{
+    @include text(12px,$titleColor,bold);
+    clear: both;
+    margin-bottom: 8px;
+  }
+  .unit__label{
+    float: left;
+    margin-right: 4px;
+  }
+  .unit__content{clear: both;}
+}
+
 /*ABOUT page ------------------------*/
 
 

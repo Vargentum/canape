@@ -118,9 +118,10 @@ $default-text-weight                : normal !default;
 .fLine{
   .flexbox &{
     @include display-box;
+    @include box-pack(justify);
     &>*{@include box-flex;}
   }
-  .no-flexbox &{@extend .hLine;}
+  .no-flexbox &{@extend .jLine;}
 }
 .fLine-full{
   .flexbox &{
@@ -161,6 +162,7 @@ $default-text-weight                : normal !default;
 }
 :root .gradient {filter: none \0/IE9; }//hack for ie9 - need for gradient backgrounds
 .ie9-gradient-support{$experimental-support-for-svg: true; @extend .gradient;}
+
 
 
 /*===============================================================
@@ -224,6 +226,15 @@ $default-text-weight                : normal !default;
   font-weight: $text-weight;
 }
 
+//img containers
+@mixin img-container-horisontal($width){
+  width:$width;
+  &>img{width:$width; height: auto;}
+}
+@mixin img-container-vertical($width){
+  height:$width;
+  &>img{height:$width; width: auto;}
+}
 
 /*===============================================================
  SETTING UP FORMS
@@ -402,9 +413,7 @@ body {
   position: relative;
   //@extend .pageWidth;
   //@include display-box;
-  @extend .fLine;
-  @include box-pack(justify);
-  @include box-align(end);
+  @extend .jLine;
   padding:30px 0;
   .b-container--pageInner &{@extend .pageWidth--inner;}
   .b-container--pageIndex &{@extend .pageWidth--index;}
@@ -439,6 +448,7 @@ body {
   }
 }
 .b-social{
+  position: relative; top:40px;
   @extend .hLine;
   .unit{
     display: block;
@@ -659,8 +669,84 @@ body {
   .unit__content{clear: both;}
 }
 
-/*ABOUT page ------------------------*/
+/*NEWS page ------------------------*/
+.b-template--news{
+  padding-top: 50px;
+  .unit{
+    margin-bottom: 20px;
+    @extend .jLine-top;
+  }
+  .unit__photo{
+    width:115px;
+    margin-top: 4px;
+    img{width:115px; height: auto;}
+  }
+  .unit__content{
+    width:440px;
+    width: -webkit-calc(100% - 135px);
+    width: -moz-calc(100% - 155px);
+    width: calc(100% - 155px);
+    font-size: 12px;
+  }
+  .unit__title{
+    font-weight: bold;
+    color:$titleColor;
+    margin: 2px 0;
+  }
+}
 
+/*CONTACTS page ------------------------*/
+.b-template--contacts{
+  .title{
+    @include text(25px,$titleColor,bold);
+    margin-bottom: 15px;
+  }
+  .map{padding-top:30px;}
+}
+
+/*PROJECTS page ------------------------*/
+.b-template--projects{
+  .title{
+    @include text(25px,$titleColor,bold);
+    margin-bottom: 25px;
+  }
+  .unit{
+    margin-bottom: 50px;
+    @extend .jLine-top;
+  }
+  .unit__photo{
+    width:365px;
+    padding-top: 4px;
+  }
+  .unit__photo__main{
+    @include img-container-horisontal(355px);
+  }
+  .unit__photo__thumbs{
+    margin:10px 0;
+    @extend .hLine;
+  }
+  .unit__photo__thumbs__unit{
+    @include inline-block;
+    @include img-container-horisontal(115px);
+    margin-right: 1px;
+  }
+
+  .unit__main{
+    width:210px;
+    width: -webkit-calc(100% - 370px);
+    width: -moz-calc(100% - 370px);
+    width: calc(100% - 370px);
+  }
+  .unit__main__header{
+    margin-bottom: 10px;}
+  .unit__main__title{
+    font-weight: bold;
+  }
+  .unit__main__content{
+    text-align: justify;
+
+  }
+}
 
 
 
